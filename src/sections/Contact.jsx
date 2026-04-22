@@ -14,20 +14,20 @@ const Contact = () => {
             </p>
             <div className="flex flex-col gap-4">
               <a
-                href="mailto:tuemail@gmail.com"
+                href="mailto:jbaigorria0@gmail.com"
                 className="flex items-center gap-3 text-gray-300 hover:text-yellow-400 transition-colors"
               >
                 <Icon icon="mdi:email" className="w-6 h-6 text-yellow-400" />
                 jbaigorria0@gmail.com
               </a>
               <a
-                href="https://github.com/tuusuario"
+                href="https://github.com/JdbWeb655"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-300 hover:text-yellow-400 transition-colors"
               >
                 <Icon icon="logos:github-icon" className="w-6 h-6" />
-                github.com/JdbWeb655
+                github.com
               </a>
               <a
                 href="https://linkedin.com/in/jorge-baigorria-b4905411a"
@@ -36,7 +36,7 @@ const Contact = () => {
                 className="flex items-center gap-3 text-gray-300 hover:text-yellow-400 transition-colors"
               >
                 <Icon icon="logos:linkedin-icon" className="w-6 h-6" />
-                linkedin.com/in/jorgeBaigorria
+                linkedin.com
               </a>
             </div>
           </div>
