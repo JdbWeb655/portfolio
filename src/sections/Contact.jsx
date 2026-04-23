@@ -29,9 +29,9 @@ const Contact = () => {
             </p>
             <div className="flex flex-col gap-4">
               {[
-                { icon: "mdi:email", href: "mailto:tuemail@gmail.com", label: "tuemail@gmail.com" },
-                { icon: "logos:github-icon", href: "https://github.com/tuusuario", label: "github.com/tuusuario" },
-                { icon: "logos:linkedin-icon", href: "https://linkedin.com/in/tuusuario", label: "linkedin.com/in/tuusuario" },
+                { icon: "mdi:email", href: "mailto:jbaigorria0@gmail.com", label: "jbaigorria0@gmail.com" },
+                { icon: "logos:github-icon", href: "https://github.com/JdbWeb655", label: "github.com/JdbWeb655" },
+                { icon: "logos:linkedin-icon", href: "https://linkedin.com/in/jorge-baigorria-b4905411a", label: "linkedin.com/in/jorge-baigorria" },
               ].map((item, index) => (
                 <motion.a
                   key={item.label}
