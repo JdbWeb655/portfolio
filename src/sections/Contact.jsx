@@ -1,7 +1,32 @@
+import { useState, useRef } from "react"
+import emailjs from "@emailjs/browser"
 import { motion } from "framer-motion"
 import { Icon } from "@iconify/react"
 
+const SERVICE_ID = `service_zdg8iue`
+const TEMPLATE_ID = `template_r1kvz3g`
+const PUBLIC_KEY = `pAkjBUopP05awp8wS`
+
 const Contact = () => {
+  const formRef = useRef()
+  const [status, setStatus] = useState(null)
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async() => {
+    setLoading(true)
+    setStatus(null)
+    try {
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
+      setStatus('success')
+      formRef.current.reset()
+    }catch (error) {
+      console.log(error)
+      setStatus('error')
+    }finally{
+      setLoading(false)
+    }
+  }
+
   return (
     <section id="contact" className="py-20 px-6">
       <div className="max-w-5xl mx-auto">
@@ -52,37 +77,54 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          <motion.form
+          <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="flex flex-col gap-4"
           >
-            <input
-              type="text"
-              placeholder="Tu nombre"
-              className="bg-gray-800 border border-gray-700 focus:border-yellow-400 outline-none rounded-xl px-4 py-3 text-white placeholder-gray-500 transition-colors"
-            />
-            <input
-              type="email"
-              placeholder="Tu email"
-              className="bg-gray-800 border border-gray-700 focus:border-yellow-400 outline-none rounded-xl px-4 py-3 text-white placeholder-gray-500 transition-colors"
-            />
-            <textarea
-              rows={5}
-              placeholder="Tu mensaje"
-              className="bg-gray-800 border border-gray-700 focus:border-yellow-400 outline-none rounded-xl px-4 py-3 text-white placeholder-gray-500 transition-colors resize-none"
-            />
-            <motion.button
-              type="button"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-bold px-6 py-3 rounded-xl transition-colors"
+            <form 
+              ref={formRef}
+              className="flex flex-col gap-4" 
             >
-              Enviar mensaje
-            </motion.button>
-          </motion.form>
+              <input
+                type="text"
+                name="name"
+                placeholder="Tu nombre"
+                className="bg-gray-800 border border-gray-700 focus:border-yellow-400 outline-none rounded-xl px-4 py-3 text-white placeholder-gray-500 transition-colors"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Tu email"
+                className="bg-gray-800 border border-gray-700 focus:border-yellow-400 outline-none rounded-xl px-4 py-3 text-white placeholder-gray-500 transition-colors"
+              />
+              <textarea
+                rows={5}
+                name="message"
+                placeholder="Tu mensaje"
+                className="bg-gray-800 border border-gray-700 focus:border-yellow-400 outline-none rounded-xl px-4 py-3 text-white placeholder-gray-500 transition-colors resize-none"
+              />
+              {
+                status === 'success' && (
+                <p className="text-green-400 text-sm">✅ Mensaje enviado correctamente.</p>
+              )}
+              {
+                status === "error" && (
+                <p className="text-red-400 text-sm">❌ Hubo un error, intentá de nuevo.</p>
+              )}
+              <motion.button
+                type="button"
+                onClick={handleSubmit}
+                disabled={loading}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-bold px-6 py-3 rounded-xl transition-colors"
+              >
+                {loading ? 'Enviando...' : 'Enviar'}
+              </motion.button>
+            </form>
+          </motion.div>
         </div>
       </div>
     </section>
